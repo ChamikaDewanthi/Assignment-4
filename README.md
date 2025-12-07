@@ -6,13 +6,13 @@ Restore PostgreSQL Database
 2.	Create a new database named "Aurora".
 3.	Select restore on the database.
 4.	Select format as plain.
-5.	Select the "schema.backup" file from "/Assignment-4-1.0.0/db_restore/postgres/" path.
+5.	Select the "schema.backup" file from "/Assignment-4-main/db_restore/postgres/" path.
 6.	Click restore.
 
 Restore MongoDB Collections
 1.	Open MongoDB Compass.
 2.	Click import connections.
-3.	Select source file "compass-connections.json" from "/Assignment-4-1.0.0/db_restore/mongo/" path.
+3.	Select source file "compass-connections.json" from "/Assignment-4-main/db_restore/mongo/" path.
 4.	Click import.
 
 Execute source code
