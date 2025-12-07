@@ -1,0 +1,308 @@
+--
+-- PostgreSQL database dump
+--
+
+\restrict FQnF0RSAIfZfR0EQwNlxyJO2gpeRwgIJXuqVyNGOkHLLHt5YBwWOtos7GqYnqWM
+
+-- Dumped from database version 18.0
+-- Dumped by pg_dump version 18.0
+
+-- Started on 2025-12-07 19:48:15
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 4 (class 2615 OID 2200)
+-- Name: public; Type: SCHEMA; Schema: -; Owner: pg_database_owner
+--
+
+CREATE SCHEMA public;
+
+
+ALTER SCHEMA public OWNER TO pg_database_owner;
+
+--
+-- TOC entry 5038 (class 0 OID 0)
+-- Dependencies: 4
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: pg_database_owner
+--
+
+COMMENT ON SCHEMA public IS 'standard public schema';
+
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 222 (class 1259 OID 16706)
+-- Name: attendance; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.attendance (
+    record_id text NOT NULL,
+    employee_id text,
+    project_id text,
+    date text,
+    status text,
+    hours_worked integer
+);
+
+
+ALTER TABLE public.attendance OWNER TO postgres;
+
+--
+-- TOC entry 219 (class 1259 OID 16682)
+-- Name: employee; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.employee (
+    employee_id text CONSTRAINT employee_employe_id_not_null NOT NULL,
+    name text,
+    age integer,
+    email text,
+    department_id text,
+    title_id text,
+    project_id text,
+    manager_id text
+);
+
+
+ALTER TABLE public.employee OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 16698)
+-- Name: project; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.project (
+    project_id text NOT NULL,
+    name text,
+    department_id text,
+    budget double precision,
+    team_size integer
+);
+
+
+ALTER TABLE public.project OWNER TO postgres;
+
+--
+-- TOC entry 223 (class 1259 OID 16714)
+-- Name: salary; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.salary (
+    employee_id text NOT NULL,
+    base_salary double precision,
+    bonus double precision,
+    tax_rate double precision,
+    pay_grade integer
+);
+
+
+ALTER TABLE public.salary OWNER TO postgres;
+
+--
+-- TOC entry 220 (class 1259 OID 16690)
+-- Name: title; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.title (
+    title_id text NOT NULL,
+    job_title text,
+    pay_grade integer,
+    level text,
+    employee_count integer
+);
+
+
+ALTER TABLE public.title OWNER TO postgres;
+
+--
+-- TOC entry 5031 (class 0 OID 16706)
+-- Dependencies: 222
+-- Data for Name: attendance; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.attendance (record_id, employee_id, project_id, date, status, hours_worked) FROM stdin;
+50015	100015	P112	1/16/2025	Leave	0
+50016	100016	P106	1/17/2025	Present	7
+50017	100008	P106	1/18/2025	Leave	0
+50018	100025	P102	1/19/2025	Remote	10
+50019	100019	P107	1/20/2025	Absent	0
+50020	100020	P112	1/21/2025	Leave	0
+50021	100021	P100	1/22/2025	Present	7
+50022	100009	P105	1/23/2025	Present	5
+50023	100023	P113	1/24/2025	Leave	0
+50024	100024	P106	1/25/2025	Remote	4
+50025	100025	P102	1/26/2025	Present	6
+50026	100026	P105	1/27/2025	Leave	0
+50027	100027	P111	1/28/2025	Remote	4
+50028	100028	P101	1/29/2025	Remote	7
+50029	100025	P102	1/30/2025	Absent	0
+\.
+
+
+--
+-- TOC entry 5028 (class 0 OID 16682)
+-- Dependencies: 219
+-- Data for Name: employee; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.employee (employee_id, name, age, email, department_id, title_id, project_id, manager_id) FROM stdin;
+100015	Ashley Fisher	26	ashley.fisher@aurora.com	114	T15	P108	M006
+100016	Michael Li	59	michael.li@aurora.com	109	T15	P102	M014
+100017	John Berry	40	john.berry@aurora.com	109	T08	P113	M010
+100018	Stephanie Bradley	24	stephanie.bradley@aurora.com	102	T04	P112	M002
+100019	Kathleen Phillips	25	kathleen.phillips@aurora.com	112	T11	P108	M008
+100020	Sharon Carter	46	sharon.carter@aurora.com	101	T05	P100	M004
+100021	Melissa Norris	32	melissa.norris@aurora.com	108	T12	P110	M015
+100022	Tina Cross	34	tina.cross@aurora.com	110	T01	P103	M004
+100023	Julie Salazar	59	julie.salazar@aurora.com	101	T06	P114	M007
+100024	Kim Stephens	22	kim.stephens@aurora.com	103	T11	P104	M013
+100025	Robert Le	35	robert.le@aurora.com	111	T02	P106	M010
+100026	Kenneth Wolf	52	kenneth.wolf@aurora.com	107	T08	P111	M008
+100027	Randy Sanchez	26	randy.sanchez@aurora.com	111	T03	P107	M010
+100028	Julie Jackson	40	julie.jackson@aurora.com	104	T01	P112	M007
+100029	Ronald Martin	42	ronald.martin@aurora.com	102	T01	P107	M012
+\.
+
+
+--
+-- TOC entry 5030 (class 0 OID 16698)
+-- Dependencies: 221
+-- Data for Name: project; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.project (project_id, name, department_id, budget, team_size) FROM stdin;
+P100	NovaCore Platform	101	159000	16
+P101	AstraSync Cloud Suite	102	182000	14
+P102	QuantumLink Integration System	103	197000	10
+P103	HelixSecure Identity Manager	104	130000	10
+P104	OptiFlow Automation Engine	105	199000	3
+P105	DataSphere Analytics Hub	106	47000	15
+P106	VeloMatrix Optimization Tool	107	132000	11
+P107	CyberNova Threat Monitor	108	137000	8
+P108	PulseStream IoT Dashboard	109	79000	13
+P109	FusionGrid Resource Manager	110	45000	11
+P110	EchoSense AI Assistant	111	117000	5
+P111	TerraByte Data Migration Tool	112	105000	20
+P112	SkyLine API Gateway	113	118000	15
+P113	AuroraEdge Compute Service	114	43000	14
+P114	NexVision Mobile Framework	115	95000	10
+\.
+
+
+--
+-- TOC entry 5032 (class 0 OID 16714)
+-- Dependencies: 223
+-- Data for Name: salary; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.salary (employee_id, base_salary, bonus, tax_rate, pay_grade) FROM stdin;
+100015	5000	700	13.59	6
+100016	6900	1300	23.42	6
+100017	7100	1300	13.26	4
+100018	5100	1500	5.2	5
+100019	7900	1500	8.49	3
+100020	5400	1200	9.57	2
+100021	7600	200	23.5	4
+100022	9000	700	15.68	5
+100023	8200	200	5.77	1
+100024	5300	400	21.69	6
+100025	6800	500	6.56	1
+100026	6600	1100	22.71	3
+100027	4400	500	9.08	5
+100028	4300	600	18.37	4
+100029	8900	1200	5.97	4
+\.
+
+
+--
+-- TOC entry 5029 (class 0 OID 16690)
+-- Dependencies: 220
+-- Data for Name: title; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.title (title_id, job_title, pay_grade, level, employee_count) FROM stdin;
+T01	Associate Software Engineer	1	Entry-level	13
+T02	Network Engineer	2	Mid-level	8
+T03	Security Analyst	3	Senior-level	5
+T04	Technical Support	3	Senior-level	11
+T05	HR Specialist	2	Mid-level	13
+T06	Software Architect	3	Senior-level	17
+T07	Project Manager	4	Manager	20
+T08	Financial Analyst	2	Mid-level	4
+T09	Data Engineer	2	Mid-level	13
+T10	Senior Software Engineer	3	Senior-level	17
+T11	DevOps Engineer	2	Mid-level	6
+T12	QA Engineer	1	Entry-level	10
+T13	Lead Software Engineer	3	Senior-level	10
+T14	UX Designer	2	Mid-level	7
+T15	Operations Lead	4	Manager	20
+\.
+
+
+--
+-- TOC entry 4878 (class 2606 OID 16713)
+-- Name: attendance attendance_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.attendance
+    ADD CONSTRAINT attendance_pkey PRIMARY KEY (record_id);
+
+
+--
+-- TOC entry 4872 (class 2606 OID 16689)
+-- Name: employee employee_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employee
+    ADD CONSTRAINT employee_pkey PRIMARY KEY (employee_id);
+
+
+--
+-- TOC entry 4876 (class 2606 OID 16705)
+-- Name: project project_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.project
+    ADD CONSTRAINT project_pkey PRIMARY KEY (project_id);
+
+
+--
+-- TOC entry 4880 (class 2606 OID 16721)
+-- Name: salary salary_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.salary
+    ADD CONSTRAINT salary_pkey PRIMARY KEY (employee_id);
+
+
+--
+-- TOC entry 4874 (class 2606 OID 16697)
+-- Name: title title_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.title
+    ADD CONSTRAINT title_pkey PRIMARY KEY (title_id);
+
+
+-- Completed on 2025-12-07 19:48:16
+
+--
+-- PostgreSQL database dump complete
+--
+
+\unrestrict FQnF0RSAIfZfR0EQwNlxyJO2gpeRwgIJXuqVyNGOkHLLHt5YBwWOtos7GqYnqWM
+
