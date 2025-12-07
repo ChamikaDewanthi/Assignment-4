@@ -118,7 +118,7 @@ def update_handler(query):
         return "This operation can be used only for update queries"
     mongo_results = mongo_update_handler(query)
     postgres_results = postgres_update_handler(query)
-    if mongo_results != -1 and postgres_results != -1:
+    if mongo_results != -1 and postgres_results != -1 and postgres_results != 0:
         results = concetenate_data(mongo_results, postgres_results)
     elif mongo_results != -1:
         results = mongo_results
